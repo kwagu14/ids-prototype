@@ -5,7 +5,7 @@ import sys
 
 #Publisher code: 
 
-if(len(sys.argv) < 2 || len(sys.argv) > 2):
+if(len(sys.argv) < 2 or len(sys.argv) > 2):
 	print("Wrong number of arguments entered. Correct usage is: python publish.py [topic] [payload]")
 	sys.exit(0)
 
