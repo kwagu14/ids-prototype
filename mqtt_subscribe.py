@@ -7,7 +7,7 @@ import sys
 
 #check command line arguments before doing anything else
 
-if(len(sys.argv) > 1 or len(sys.argv) < 1):
+if(len(sys.argv) > 2 or len(sys.argv) < 2):
 	print("Wrong number of arguments entered. Correct usage is: python mqtt_subscribe.py [topic]")
 	sys.exit(0)
 
