@@ -7,6 +7,7 @@ import sys
 
 if(len(sys.argv) < 2 || len(sys.argv) > 2):
 	print("Wrong number of arguments entered. Correct usage is: python publish.py [topic] [payload]")
+	sys.exit(0)
 
 topic = sys.argv[1]
 payload = sys.argv[2]
