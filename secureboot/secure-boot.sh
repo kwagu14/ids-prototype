@@ -9,4 +9,4 @@
 
 docker stop appEnv
 docker rm appEnv
-docker run -d -t --name appEnv app-env:Dockerfile
+docker run --device /dev/gpiomem -d -t --name appEnv app-env:Dockerfile
