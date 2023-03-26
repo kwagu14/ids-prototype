@@ -2,6 +2,7 @@
 
 import paho.mqtt.client as mqtt
 import sys
+import os
 
 #subscriber code:
 
@@ -20,6 +21,8 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg): 
 	result = msg.payload.decode()
 	print("Received payload from topic", topic, ": ", result)
+	if topic == "security/alert" and result == "COMPROMISE":
+		os.system('sh /home/karleywa/ids-prototype/secureboot/secure-boot.sh')
 
 client = mqtt.Client()
 client.connect("192.168.0.80", 1883, 60)
