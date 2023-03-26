@@ -22,7 +22,7 @@ def on_message(client, userdata, msg):
 	print("Received payload from topic", topic, ": ", result)
 
 client = mqtt.Client()
-client.connect("192.168.122.232", 1883, 60)
+client.connect("192.168.0.80", 1883, 60)
 
 client.on_connect = on_connect
 client.on_message = on_message
