@@ -7,6 +7,8 @@
 # I am using a custom image I created with a dockerfile (app-env), so that the IoT 
 # application is automatically injected and started in the container upon creation 
 
+echo "Beginning secure boot process"
 docker stop appEnv
 docker rm appEnv
 docker run --device /dev/gpiomem -d -t --name appEnv app-env:Dockerfile
+echo "Completed boot of app environment"
