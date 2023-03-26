@@ -13,6 +13,6 @@ topic = sys.argv[1]
 payload = sys.argv[2]
 
 client = mqtt.Client()
-client.connect("192.168.122.232", 1883, 60)
+client.connect("192.168.0.80", 1883, 60)
 client.publish(topic, payload);
 client.disconnect();
