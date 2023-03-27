@@ -153,15 +153,20 @@ def librosaPlot_Intra(wav_list):
         stop = timeit.default_timer()
         print('cost and path calculation Time: ', stop - start)
 
-        
         start = timeit.default_timer()
         print("Calculating normalized distance")
         dist = dtwNormDist_Calc(mfcc1.T, mfcc2.T, intArr1, intArr2)
+
+	#return distance to a file so mem-forensics can retrieve it
+        retFile = open("simularity.txt", "w")
+        retFile.write(str(dist))
+        retFile.close()
+
         print("The normalized distance between the two : ",dist)
         print("Completed distance calcuation")
         stop = timeit.default_timer()
         print('distance calcuation Time: ', stop - start)
-    print("***************************************************************************************************")
+        print("***************************************************************************************************")
 
 
 
