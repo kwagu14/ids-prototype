@@ -14,5 +14,6 @@ payload = sys.argv[2]
 
 client = mqtt.Client()
 client.connect("192.168.0.80", 1883, 60)
+print("[FROM MQTT_PUBLISH] sending payload " + payload + " under topic " + topic + " to broker.")
 client.publish(topic, payload);
 client.disconnect();
