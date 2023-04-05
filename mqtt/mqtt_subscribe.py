@@ -25,7 +25,7 @@ def on_message(client, userdata, msg):
 	print(source + " Received payload from topic", topic, ": ", result)
 	if topic == "security/alerts" and result == "COMPROMISE":
 		print(source + " Compromise detected; Beginning secure boot process")
-		os.system('sh /home/karleywa/ids-prototype/secureboot/secure-boot.sh')
+		os.system('sh /ids-prototype/secureboot/secure-boot.sh')
 		print(source + " Finished boot process")
 
 client = mqtt.Client()

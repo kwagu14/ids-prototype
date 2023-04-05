@@ -7,31 +7,23 @@ pid=$(docker inspect -f '{{.State.Pid}}' $cid)
 threshold=190000
 echo "[FROM MEM-FORENSICS] cid and pid initialized"
 
-#empty out t0 and t1
-cd /home/karleywa/ids-prototype/fingerprinting/New_Mem_Dumps/$app
-rm -r t0 t1
-mkdir t0 t1
-#get an initial "clean" dump
-cd t0
-mkdir bin
-cd bin
+#initialize t0 with a clean memdump
+cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app/t0/bin
 ./../../../../memfetch/memfetch $pid
 echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
  
 #while [ true ]
 #do
 	#go into the t1 dir; last good fingerprint in t0
-	cd /home/karleywa/ids-prototype/fingerprinting/New_Mem_Dumps/$app/t1
-	mkdir bin
-	cd bin
+	cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app/t1/bin
 	#get a memory dump of the iot process into t1
 	./../../../../memfetch/memfetch $pid
 	echo "[FROM MEM-FORENSICS] finished getting mem dump for t1"
 	#go into fingerprinting dir
-	cd /home/karleywa/ids-prototype/fingerprinting
+	cd /ids-prototype/fingerprinting
 	#run the fingerprinting script
 	echo "[FROM MEM-FORENSICS] running fingerprinting script"
-	#python3 fingerprinting.py Intra $(app)
+	python3 fingerprinting.py Intra $(app)
 	#get the similarity score
 	similarity=191000
 	#similarity=$(cat similarity.txt)
@@ -42,15 +34,15 @@ echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
 		echo "[FROM MEM-FORENSICS] similarity found to be greater than threshold; beginning secure boot"
 		echo "[FROM MEM-FORENSICS] Broadcasting alert to other devices"
 		#Broadcast alert in network
-		python3 /home/karleywa/ids-prototype/mqtt/mqtt_publish.py "security/alerts" "COMPROMISE"
+		python3 /ids-prototype/mqtt/mqtt_publish.py "security/alerts" "COMPROMISE"
 		#call secure boot
 		echo "[FROM MEM-FORENSICS] calling secure boot"
-		sh /home/karleywa/ids-prototype/secureboot/secure-boot.sh
+		sh /ids-prototype/secureboot/secure-boot.sh
 		#at this point, we have a clean instance; need to update cid, pid, and t0
 		echo "[FROM MEM-FORENSICS] clean instance created; resetting variables"
 		cid=$(docker container ls --all --quiet --no-trunc --filter "name=appEnv")
 		pid=$(docker inspect -f '{{.State.Pid}}' $cid)
-		cd /home/karleywa/ids-prototype/fingerprinting/New_Mem_Dumps/$app/t0/bin
+		cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app/t0/bin
 		#the re-imaging will create blank t1 and t0 folders with empty bin dirs inside
 		#make new t0 and get fresh mem dump
 		echo "[FROM MEM-FORENSICS] making new t0 dump"
@@ -60,13 +52,14 @@ echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
 	else
 		echo "[FROM MEM-FORENSICS] similarity score check passed"
 		#remove t0
-		cd /home/karleywa/ids-prototype/fingerprinting/New_Mem_Dumps/$app
+		cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app
 		rm -r t0
 		echo "[FROM MEM-FORENSICS] setting t1 as the new t0"
 		#make old t1 new t0
 		mv t1 t0
 		#create a new, empty t1
 		mkdir t1
+		mkdir t1/bin
 		echo "[FROM MEM-FORENSICS] assessment complete; resuming loop"
 	fi
 
