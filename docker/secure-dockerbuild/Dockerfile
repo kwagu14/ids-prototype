@@ -3,6 +3,7 @@ FROM debian:latest
 RUN apt-get update ; apt-get install docker.io -y
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
+RUN apt-get install libsndfile1
 RUN pip3 install scipy matplotlib librosa wave dtw paho-mqtt
 RUN apt-get install -y build-essential 
 RUN apt-get install -y git
