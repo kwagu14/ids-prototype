@@ -23,7 +23,7 @@ echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
 	cd /ids-prototype/fingerprinting
 	#run the fingerprinting script
 	echo "[FROM MEM-FORENSICS] running fingerprinting script"
-	python3 fingerprinting.py Intra $(app)
+	#python3 fingerprinting.py Intra $app
 	#get the similarity score
 	similarity=191000
 	#similarity=$(cat similarity.txt)
@@ -42,9 +42,12 @@ echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
 		echo "[FROM MEM-FORENSICS] clean instance created; resetting variables"
 		cid=$(docker container ls --all --quiet --no-trunc --filter "name=appEnv")
 		pid=$(docker inspect -f '{{.State.Pid}}' $cid)
-		cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app/t0/bin
-		#the re-imaging will create blank t1 and t0 folders with empty bin dirs inside
-		#make new t0 and get fresh mem dump
+		cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app
+		#need to re-create blank t1 and t0 folders with empty bin dirs inside
+		rm -r t0 t1
+		mkdir t0 t1
+		mkdir t0/bin t1/bin
+		#make new t0 mem dump
 		echo "[FROM MEM-FORENSICS] making new t0 dump"
 		./../../../../memfetch/memfetch $pid
 		echo "[FROM MEM-FORENSICS] finished getting mem dump for t0"
