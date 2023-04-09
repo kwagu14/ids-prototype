@@ -48,6 +48,7 @@ echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
 		mkdir t0 t1
 		mkdir t0/bin t1/bin
 		#make new t0 mem dump
+		cd t0
 		echo "[FROM MEM-FORENSICS] making new t0 dump"
 		./../../../../memfetch/memfetch $pid
 		echo "[FROM MEM-FORENSICS] finished getting mem dump for t0"
