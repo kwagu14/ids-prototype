@@ -3,13 +3,7 @@ FROM debian:latest
 RUN apt-get update ; apt-get install docker.io -y
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
-RUN pip3 install scipy 
-RUN pip3 install soundfile 
-RUN pip3 install matplotlib 
-RUN pip3 install librosa 
-RUN pip3 install wave 
-RUN pip3 install dtw 
-RUN pip3 install paho-mqtt
+RUN pip3 install scipy matplotlib librosa wave dtw paho-mqtt
 RUN apt-get install -y build-essential 
 RUN apt-get install -y git
 RUN apt-get install -y mosquitto-clients
