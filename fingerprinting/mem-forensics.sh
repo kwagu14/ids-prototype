@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#subscribe to alerts topic
+python3 /ids-prototype/mqtt/mqtt_subscribe.py "security/alerts" &
+
 #initialize values
 app="ir-sensor"
 cid=$(docker container ls --all --quiet --no-trunc --filter "name=appEnv")
