@@ -15,8 +15,8 @@ cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app/t0/bin
 ./../../../../memfetch/memfetch $pid
 echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
  
-#while [ true ]
-#do
+while [ true ]
+do
 	#go into the t1 dir; last good fingerprint in t0
 	cd /ids-prototype/fingerprinting/New_Mem_Dumps/$app/t1/bin
 	#get a memory dump of the iot process into t1
@@ -26,10 +26,10 @@ echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
 	cd /ids-prototype/fingerprinting
 	#run the fingerprinting script
 	echo "[FROM MEM-FORENSICS] running fingerprinting script"
-	#python3 fingerprinting.py Intra $app
+	python3 fingerprinting.py Intra $app
 	#get the similarity score
-	similarity=191000
-	#similarity=$(cat similarity.txt)
+	#similarity=191000
+	similarity=$(cat similarity.txt)
 	echo "[FROM MEM-FORENSICS] got the similarity score"
 	
 	if [ $similarity -gt $threshold ]
@@ -70,5 +70,5 @@ echo "[FROM MEM-FORENSICS] t0 mem dump initialized"
 		echo "[FROM MEM-FORENSICS] assessment complete; resuming loop"
 	fi
 
-#done
+done
 

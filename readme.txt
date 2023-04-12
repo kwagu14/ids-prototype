@@ -5,3 +5,7 @@ Some scripts used in an IDS prototype
 - fingerprinting: contains everything needed for fingerprinting and periodic mem-forensics scripts
 - secureboot: contains scripts that mimic the secure boot mechanism
 - mqtt: contains the scripts that broadcast alerts throughout the network, as well as respond to received alerts
+
+WARNING: This repo contains a dockerfile that pulls IoT malware. Please use caution.
+
+
