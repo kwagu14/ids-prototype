@@ -9,6 +9,8 @@
 
 echo "[FROM SECURE-BOOT] Beginning secure boot process"
 docker stop appEnv
+echo "[FROM SECURE-BOOT] Stopped the application environment"
 docker rm appEnv
+echo "[FROM SECURE-BOOT] Removed the app environment"
 docker run --device /dev/gpiomem -d -t --name appEnv app-env-clean:Dockerfile
-echo "[FROM SECURE-BOOT] Completed boot of app environment"
+echo "[FROM SECURE-BOOT] Completed re-imaging of app environment"
