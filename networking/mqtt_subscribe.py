@@ -29,7 +29,7 @@ def on_message(client, userdata, msg):
 		print(source + " Finished boot process")
 
 client = mqtt.Client()
-client.connect("192.168.33.10", 1883, 60)
+client.connect("192.168.33.98", 1883, 60)
 
 client.on_connect = on_connect
 client.on_message = on_message
