@@ -10,5 +10,5 @@
 echo "[FROM SECURE-BOOT] Beginning secure boot process"
 docker stop appEnv
 docker rm appEnv
-docker run --device /dev/gpiomem -d -t --name appEnv app-env:Dockerfile
+docker run --device /dev/gpiomem -d -t --name appEnv app-env-clean:Dockerfile
 echo "[FROM SECURE-BOOT] Completed boot of app environment"
