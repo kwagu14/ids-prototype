@@ -31,12 +31,9 @@ do
 	#in this case, we have a malicious memory
 	if [ $similarity="0" ]
 	then
-		echo "[FROM MEM-FORENSICS] similarity check failed; broadcasting alert to other devices"
+		echo "[FROM MEM-FORENSICS] similarity check failed; broadcasting alert to all devices"
 		#Broadcast alert in network
 		python3 /ids-prototype/networking/mqtt_publish.py "security/alerts" "COMPROMISE"
-		#call secure boot
-		echo "[FROM MEM-FORENSICS] initiating secure boot"
-		sh /ids-prototype/secureboot/secure-boot.sh
 		#at this point, we have a clean instance; need to update cid, pid, and t0
 		echo "[FROM MEM-FORENSICS] IoT environment cleaned; resetting variables"
 		cid=$(docker container ls --all --quiet --no-trunc --filter "name=appEnv")
