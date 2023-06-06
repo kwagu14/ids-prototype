@@ -25,7 +25,7 @@ do
 	python3 ../../../../networking/file_client.py iot_dev_1 fileTransfer $app-0.wav
 	#get the similarity score from the classifier
 	python3 ../../../../networking/file_client.py iot_dev_1 getSimularity $app-0.wav 
-	similarity=$(cat ../../similarity.txt)
+	similarity=$(cat similarity.txt)
 	echo "[FROM MEM-FORENSICS] got the similarity score: $simularity"
 	
 	#in this case, we have a malicious memory
