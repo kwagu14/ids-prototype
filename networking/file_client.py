@@ -39,7 +39,7 @@ def sendFile(s, filename):
 
 def receiveScore(s):
     simularity = s.recv(BUFFER_SIZE).decode()
-    retFile = open("simularity.txt", "w")
+    retFile = open("similarity.txt", "w")
     retFile.write(simularity)
     retFile.close()
 
