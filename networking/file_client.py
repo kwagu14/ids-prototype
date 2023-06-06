@@ -3,6 +3,13 @@ import tqdm
 import os
 import sys
 
+
+#This script sends requests the classifier server; it can request two different items:
+# 1) it can request to send the server a .wav file
+# 2) it can request the simularity score/classification for a specific wav file on the server
+
+###### (I speed wrote this script but there might be some better way to do it)
+
 #USAGE: 
 # Running the script: 
 #	--> python3 file_client.py [identity] [operation] [fileName]

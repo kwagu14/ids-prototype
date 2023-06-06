@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+#This script is used to publish to specific mqtt topics
+#all clients subscribed to the topic will receive the message
+
+#usage: 
+#    python3 mqtt_publish.py [topic] [payload]
+
 import paho.mqtt.client as mqtt
 import sys
 

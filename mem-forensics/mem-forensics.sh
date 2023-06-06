@@ -1,5 +1,16 @@
 #!/bin/bash
 
+#This file performs periodic memory forensics; it operates on a container representing the 
+#IoT ecosystem. 
+
+#It gets a memory dump, converts to a wav file, passes to the classifier server, then decides
+#whether a secure-boot should be performed
+
+#usage: sh mem-forensics.sh [app-name]
+
+# [app-name] should be the same name as the folder that stores the memdumps
+# e.g. memDumps/[app-name]/t0
+
 #subscribe to alerts topic
 python3 /ids-prototype/networking/mqtt_subscribe.py "security/alerts" &
 
@@ -26,12 +37,12 @@ do
 	#get the similarity score from the classifier
 	python3 ../../../../networking/file_client.py iot_dev_1 getSimularity $app-0.wav 
 	similarity=$(cat similarity.txt)
-	echo "[FROM MEM-FORENSICS] got the similarity score: $simularity"
+	echo "[FROM MEM-FORENSICS] got the simularity score: $simularity"
 	
 	#in this case, we have a malicious memory
 	if [ $similarity="0" ]
 	then
-		echo "[FROM MEM-FORENSICS] similarity check failed; broadcasting alert to other devices"
+		echo "[FROM MEM-FORENSICS] simularity check failed; broadcasting alert to other devices"
 		#Broadcast alert in network
 		python3 /ids-prototype/networking/mqtt_publish.py "security/alerts" "COMPROMISE"
 		#call secure boot

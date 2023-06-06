@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
+#this script can subscribe to certain MQTT topics 
+#once subscribed, they will receive all payloads broadcast under that topic
+
+#usage: 
+#    python3 mqtt_subscribe [topic]
+
 import paho.mqtt.client as mqtt
 import sys
 import os
 
 source = "[FROM MQTT_SUBSCRIBE] "
-
-#subscriber code:
 
 #check command line arguments before doing anything else
 
