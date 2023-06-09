@@ -12,8 +12,10 @@ This system mimics the RO-IoT recovery mechanism. It is meant to run on a Rasber
 
 Since the Raspberry Pi 4 does not have ARM TrustZone features required of RO-IoT, the concept is mimicked through the use of containers. 
 
-One container contains all IDS functions and models the "secure" environment or the TEE. 
+One container contains all IDS functions and models the TEE. 
 
-The other container contains the IoT process and any other untrusted programs and models the regular IoT environment/OS/firmware, etc
+The other container contains the IoT process and any other untrusted programs and models the regular IoT environment/OS/firmware
+
+This solution is ok for the proof-of-concept but should not be used in the final product. In the real world, malware will not infect a single container on the system. It will instead infect the entire host. In the final implementation, we need to use a chip that has ARM TrustZone so that we can implement IDS functions correctly in the TEE. 
 
 
